@@ -1,0 +1,34 @@
+<html lang = "en">
+   <head>
+      
+   </head>
+
+
+
+<body>
+
+<div class="container-fluid">
+        <h2>Update main category</h2>
+        <form [formGroup]="updateMCform">
+
+        <div class="form-group">
+            <label >Name of main category</label>
+            <input  formControlName="name" type="text" class="form-control">
+
+                 
+         </div>
+      
+        <div class="form-group">
+                <label>Description:</label>
+               <textarea class="form-control" rows="5"  input type = "textarea"  formControlName="description"></textarea>
+
+         </div>
+         <br>
+<button  [disabled]="!updateMCform.valid" type="button" class="btn btn-primary" routerLink = "/all-main-categoris" (click) = "update()">Updae main category</button>
+</form>
+</div>      
+
+
+      
+</body>
+</html>

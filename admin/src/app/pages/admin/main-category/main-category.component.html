@@ -1,0 +1,32 @@
+   <html lang = "en">
+      <head>
+         <title> Main categories</title>
+      </head>
+   <body>
+
+    <br>
+   <button type="button" class="btn btn-primary btn-lg btn-block" routerLink = "/add-main-category" routerDirection = "forward" >Add main category</button>  
+   <br>
+   
+   
+   <input class="form-control" type="text" [(ngModel)] = "searchTerm"  placeholder="Search main category" aria-label="Search">
+<br>
+   <h3> All categories in the database </h3>
+
+   <br>
+
+   <div class="container" *ngFor = "let cat of categories_list | filter : searchTerm " >
+         <div class="row">
+                  <div class="col-3">{{cat.name}}</div>
+                  <div class="col-3">{{cat.description}}</div>
+                  <div class="col-3">{{cat.date}}</div>
+                     <button class="btn btn-primary" (click) = "view(cat)" > view</button>
+                     <button class="btn btn-primary" (click) = "update(cat, cat.main_id)" >Edit</button>
+                  <!----  <button class="btn btn-primary" (click) = "delete(cat.main_id)" routerLink = "/all-main-categoris"> delete</button> -->
+         </div>
+   </div>
+
+
+
+   </body>
+   </html>

@@ -1,0 +1,80 @@
+<br>
+
+<h1>Start a new purchase</h1>
+
+<form class="example-form" [formGroup]="purchaseform">
+
+  <h3>Enter mobile number of the seller</h3>
+      
+  <mat-form-field class="example-full-width">
+    <mat-label>Phone number</mat-label>
+    <input matInput formControlName="vendor_mobile"  type="tel" [class.is-invalid] = "vendor_mobile.invalid && vendor_mobile.touched">
+   
+  </mat-form-field>
+
+  <div *ngIf= "vendor_mobile.invalid && vendor_mobile.touched && vendor_mobile.dirty">
+
+    <small *ngIf = "vendor_mobile.errors?.required"  class="text-danger"> This field is required</small>
+    <small *ngIf = "vendor_mobile.errors?.minLength || vendor_mobile.errors?.maxLength "  class="text-danger"> Enter a valid phone number</small>
+    <small *ngIf = "vendor_mobile.errors?.pattern"  class="text-danger"> Entar a valid phone number</small>
+
+  </div>
+
+
+ <button type="button"  class="btn btn-primary" [disabled] = "!vendor_mobile.valid " (click) = "verify_vendor()">Verify Seller</button>
+
+<br>  
+<br>
+<h2>Add product details</h2>
+
+<div formArrayName="product">
+  <div *ngFor="let prod of product?.controls; let i = index" [formGroupName]="i">
+    <mat-form-field class="example-full-width">
+      <mat-label>Enter product name</mat-label>
+
+      <input matInput #input
+             aria-label="product name"
+             [matAutocomplete]="auto"
+             formControlName ="product_name">
+
+          <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" >
+          <ng-container *ngIf="productList$[i] |async as results">
+            <mat-option *ngFor="let state of results" [value]="state"  >
+              <span>{{state.name}}</span>
+            </mat-option>
+            <mat-option *ngIf="prod.get('product_name').value && results?.length<=0" class="text-danger">
+              Such product does not exists
+            </mat-option>
+          </ng-container>
+        </mat-autocomplete>
+
+                                   
+    </mat-form-field>  
+
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Enter product quantity</mat-label>
+        <input matInput formControlName="product_quantity" type="number" >
+      </mat-form-field>
+
+  
+      <mat-form-field class="example-full-width">
+        <mat-label>Enter product price</mat-label>
+      <input matInput formControlName="product_Buyingprice" type="number">
+      </mat-form-field>
+
+      <br>
+      <br>
+
+      <button type="button" [disabled]="!purchaseform.valid" class="btn btn-primary"  (click) = "addproduct()">Add product</button>               
+      <button [disabled] = "i==0" type="button" class="btn btn-danger" (click) = "remove_product(i)">Delete product</button>
+
+      <br>
+     <br>
+  </div>  
+</div>  
+
+<br>
+<button type="button" (click)="purchase(purchaseform.value)" [disabled]="!purchaseform.valid  " class="btn btn-primary" >Submit</button>
+
+</form> 

@@ -1,0 +1,67 @@
+
+<div *ngIf="show" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScroll()">
+
+    <mat-accordion displayMode="flat" multi class="mat-table">
+      <section matSort class="mat-elevation-z2 mat-header-row">
+        <span class="mat-header-cell" mat-sort-header="Order_Id">Order_Id</span>
+        <span class="mat-header-cell" mat-sort-header="User_name">Name</span>
+        <span class="mat-header-cell" mat-sort-header="User_name">Mobile Number</span>
+        <span class="mat-header-cell" mat-sort-header="vesselId">Date</span>
+        <span class="mat-header-cell" mat-sort-header="Payment_status">Payment status</span>
+        <span class="mat-header-cell" mat-sort-header="Amount">Amount in (Rs)</span>
+        <span class="mat-header-cell" mat-sort-header="Delivered">Delivered</span>
+        <span class="mat-header-cell" mat-sort-header="Canceled">Canceled</span>
+
+  
+      </section>
+    
+      <mat-expansion-panel *ngFor="let item of orders" >
+        <mat-expansion-panel-header class="mat-row"   >
+          <span class="mat-cell" (click)="$event.stopPropagation();">{{item.order_id}}</span>
+          <span class="mat-cell" (click)="$event.stopPropagation();">{{item.users.business_name}}</span>
+          <span class="mat-cell" (click)="$event.stopPropagation();">{{item.users.mobile_no}}</span>
+          <span class="mat-cell" (click)="$event.stopPropagation();">{{item.date | slice : 0:10}}</span>
+          <span class="mat-cell" (click)="$event.stopPropagation();">{{item.payment_type}}</span>
+          <span class="mat-cell" (click)="$event.stopPropagation();">{{item.amount}}</span>
+          <span class="mat-cell"><mat-checkbox [checked]="item.status ==='delivered'"  class="example-margin"></mat-checkbox></span>
+          <span class="mat-cell"><mat-checkbox [checked]="item.status ==='canceled'"  class="example-margin"></mat-checkbox></span>
+
+        </mat-expansion-panel-header>      
+  
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Index</th>
+              <th scope="col">Product name</th>
+              <th scope="col">Quantity</th>
+              <th scope="col">Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let product of item.orderedProducts ; let j = index">
+              <th scope="row">{{j + 1}}</th>
+              <td>{{product.product.name}}</td>
+              <td>{{product.quantity}}</td>
+              <td>{{product.price}}</td>
+            </tr>
+          
+          </tbody>
+  
+          <tfoot>
+  
+            <tr>
+              <td colspan="3">Total</td>
+              <td>₹{{item.amount}}</td>
+            </tr>
+            
+          </tfoot>
+        </table>
+  
+      <div> <b>Address</b> - {{item.address.address_line1}}, {{item.address.address_line2}}, {{item.address.landmark}}, {{item.address.city}}, {{item.address.state}} - {{item.address.pincode}}</div>  
+      <div *ngIf= "item.address.alternate_mobile_no"> Alternate Mobile number - {{ item.address.alternate_mobile_no }}</div>
+      </mat-expansion-panel>
+    
+    </mat-accordion>
+  </div>
+  
+  

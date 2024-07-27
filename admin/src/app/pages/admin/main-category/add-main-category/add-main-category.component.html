@@ -1,0 +1,33 @@
+<html lang = "en">
+
+<body>
+    <div class="container-fluid">
+        <h2>Add main category</h2>
+        <form [formGroup]="addMCform">
+        <div class="form-group">
+            
+            <label>Name of main category</label>
+            <input [class.is-invalid] = "name.invalid && name.touched" formControlName="name" type="text" class="form-control" placeholder="Enter name of category">
+
+            <div *ngIf= "name.invalid && name.touched">
+                    <small *ngIf = "name.errors?.required"  class="text-danger"> name is required</small>
+                    <small *ngIf = "name.errors?.minlength" class="text-danger"> name must be at least 3 characters </small>
+  
+               </div>     
+
+        </div>
+      
+        <div class="form-group">
+                <label>Description:</label>
+                <textarea class="form-control" rows="5"  input type = "textarea"  formControlName="description" placeholder="Enter description"></textarea>
+         </div>
+
+<button [disabled]="!addMCform.valid || clicked" type="submit" class="btn btn-primary" (click) = "addMain_categories() ; clicked = true">Add main category</button>
+</form>
+{{addMCform.value | json}}
+</div>
+      
+
+
+</body>
+</html>

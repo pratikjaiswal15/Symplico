@@ -1,0 +1,23 @@
+<button routerLink = "/all-products" routerDirection = "forward" >products </button>
+<button routerLink = "/all-main-categoris" routerDirection = "forward" >main category</button>
+<button routerLink = "/all-categories" routerDirection = "forward">category</button>
+<button routerLink ="/purchasing" routerDirection = "forward">New purchase</button>
+<br>
+<button routerLink ="/view-all-purchase-orders" routerDirection = "forward">View all purchase</button>
+<button routerLink ="/stock-after-purchase" routerDirection = "forward">stock after a purchase</button>
+<button routerLink ="/view-stocks" routerDirection = "forward">Final stock of products</button>
+<br>
+<br>
+<button mat-raised-button color="primary" (click) ="orders()" matBadge={{order_count}} matBadgePosition="after" matBadgeColor="warn">New orders </button>
+<br>
+<br>
+<button mat-raised-button color="primary" routerLink ="/past-orders">Past orders </button>
+<br>
+<br>
+<button mat-raised-button color="primary" routerLink ="/seller-registration">Seller Registraion </button>
+<br>
+<br>
+<button (click)="logout()">Logout</button>
+
+
+

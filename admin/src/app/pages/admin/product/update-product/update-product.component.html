@@ -1,0 +1,104 @@
+<html lang = "en">
+   <head>
+      <!-- Meta tags -->
+      <meta charset = "utf-8">
+      <meta name = "viewport" content = "width = device-width, initial-scale = 1, shrink-to-fit = no">
+      
+      
+   </head>
+
+   <body>
+        <div class="container-fluid">
+                <h2>Update product </h2>
+                <form [formGroup]="updatePform" (ngSubmit) = "update()">
+
+                        <div class="form-group">
+                                <label >Name of Product</label>
+                                <input  formControlName="name" type="text" class="form-control">      
+                        </div>
+
+                        <div class="form-group">
+                                <label>Description:</label>
+                               <textarea class="form-control" rows="5"  input type = "textarea"  formControlName="description"></textarea>
+                
+                         </div>
+                         <mat-divider></mat-divider>
+                         <label>Update Category</label>
+                         <mat-form-field class = "select">
+                                 <mat-select placeholder="Choose Category" formControlName = "sub_id" name="Sub-category"required>
+                                         <mat-select-filter [displayMember]="'name'" [array]="product_list" (filteredReturn)="filteredList1 =$event"></mat-select-filter>
+         
+                                         <mat-option *ngFor="let prod of filteredList1 " [value]="prod.category_id">
+                                     {{prod.name}}
+                                   </mat-option>
+                                 </mat-select>
+                         </mat-form-field>
+                         
+
+                         <div class="form-group">
+                                <label >Gst on product</label>
+                                <input  formControlName="gst" type="text" class="form-control">      
+                        </div>
+
+                        
+
+                <Label>Update measure unit of product</Label>
+                <mat-form-field class="select">
+                  <mat-label>Unit</mat-label>
+                  <mat-select placeholder="Choose Unit" formControlName = "unit" name="Unit"required >
+                    <mat-select-filter [displayMember]="'name'" [array]="unit_list" (filteredReturn)="filteredUnit =$event"></mat-select-filter>
+
+                    
+                    <mat-option *ngFor="let prod of filteredUnit " [value]="prod.name">
+                      {{prod.name}}
+                    </mat-option>
+
+                    </mat-select>
+                </mat-form-field>   
+                
+                   
+                         <br>
+
+   <button  [disabled]="!updatePform.valid" type="submit" class="btn btn-primary" routerLink = "/all-products">Updae </button>
+
+
+   <br>
+   <br>
+   <br>
+
+          <h2>Change Image</h2>      
+
+          <div class="form-group" *ngIf="!img">
+                 <label >Photo:</label>
+                 <img [src]= "data.image_url" height="200" width="200">
+         </div>
+
+               
+         <h5> Select image</h5>
+
+         <div class="form-group">
+                 <label for="file">File</label>
+                 <input 
+                     formControlName="file"
+                     id="file" 
+                     type="file" 
+                     class="form-control"
+                     (change)="onFileChange($event)">
+                 <div *ngIf="file.touched && file.invalid" class="alert alert-danger">
+                     <div *ngIf="file.errors.required">Image is required.</div>
+                 </div>
+             </div>
+             
+             <img [src]="imageSrc" *ngIf="imageSrc" style="height: 300px; width:500px">
+           
+
+                 </form>
+
+              
+        </div>            
+
+    
+    </body>
+
+
+    </html>

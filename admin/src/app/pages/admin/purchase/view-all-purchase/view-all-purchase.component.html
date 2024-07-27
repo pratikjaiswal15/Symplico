@@ -1,0 +1,298 @@
+<html lang="en">
+
+<body>
+
+  <h2> Viw All purchase orders </h2>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Search for seller name</mat-label>
+    <input matInput #input aria-label="product name" [matAutocomplete]="auto" [formControl]="searchVendorCtrl">
+
+
+    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn"
+      (optionSelected)='Selected($event.option.value)'>
+
+      <ng-container>
+        <mat-option *ngFor="let state of vendor_list | async " [value]="state">
+          <span>{{state.name}}</span>
+        </mat-option>
+
+        <mat-option *ngIf="(vendor_list | async)?.length==0" class="text-danger">
+          Such seller does not exists
+        </mat-option>
+        -
+      </ng-container>
+
+    </mat-autocomplete>
+
+  </mat-form-field>
+
+
+  <div *ngIf="show" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScroll()">
+
+
+    <div *ngFor="let data of purchase; let i =index;">
+      
+    
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Index</th>
+            <th scope="col">Product name</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Price</th>
+            <th scope="col">Date </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of data.purchaseProducts ; let j = index">
+            <th scope="row">{{j + 1}}</th>
+            <td>{{product.products.name}}</td>
+            <td>{{product.quantity}}</td>
+            <td>{{product.price}}</td>
+            <td>{{data.date | slice: 0:10}}</td>
+          </tr>
+        
+        </tbody>
+
+        <tfoot>
+          <tr >
+            <td colspan="3">Total</td>
+            <td>₹{{data.totalprice}}</td>
+          </tr>
+        </tfoot>
+      </table>
+  
+      </div>
+      
+
+  </div>  
+
+    
+<!----    
+    <div>
+      <div *ngFor="let data of purchase; let i =index; ">
+        <h3>
+          date - {{data.date | slice: 0:10}}
+        </h3>
+        <h3>
+          {{data.totalprice}}
+        </h3>
+      </div>
+    </div>
+    
+    <mat-list>
+      <mat-list-item *ngFor="let data of purchase; let i =index; ">
+        <h3 matLine>
+          date - {{data.date | slice: 0:10}}
+        </h3>
+        <h3 matLine>{{data.totalprice}}</h3>
+
+
+        <br>
+        <mat-list matLine>
+
+          <mat-list-item *ngFor="let product of data.purchaseProducts">
+            <h3 matLine>{{product.id}}</h3>
+            <br>
+            <h3 matLine>{{product.quantity}}</h3>
+            <br>
+            <h3 matLine>{{product.price}}</h3>
+
+            <br>
+            <h3 matLine>{{product.products.name}}</h3>
+          </mat-list-item>
+
+
+        </mat-list>
+
+      </mat-list-item>
+    </mat-list>
+    
+  </div>
+-->
+
+
+  <div *ngIf="dont_show">no</div>
+
+
+  <!----    
+  
+        <mat-form-field class="width">
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search by seller name , purchase_id or date"  [matAutocomplete]="auto" [formControl] = "searchVendorCtrl" matTooltip="Type to filter the seller list"
+          matTooltipPosition="after">
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let vendor of filteredoptions | async  " [value]="vendor.name">
+              <span>{{ vendor.name }} </span>
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+  
+
+      
+      
+        <mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+            <ng-container *ngFor="let column of columns; let i = index" matColumnDef="{{ column.field }}">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>{{ column.field }}
+          
+                <button class="grid-view-header-menu"
+                  mat-icon-button [matMenuTriggerFor]="menu" >
+                  <mat-icon >menu</mat-icon>
+                </button>
+          
+                <mat-menu #menu>
+                  <button mat-menu-item (click)="groupBy($event, column);">Group By This Field</button>
+                  <button mat-menu-item (click)="unGroupBy($event, column);" >Ungroup</button>
+                </mat-menu>
+          
+              </mat-header-cell>
+              <mat-cell *matCellDef="let row">{{ row[column.field] }}</mat-cell>
+            </ng-container>
+          
+            <mat-header-row mat-header-row *matHeaderRowDef ="displayedColumns" ></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          
+            <ng-container matColumnDef="groupHeader">
+              <mat-cell colspan="999" *matCellDef="let group">
+                <mat-icon *ngIf="group.expanded">expand_less</mat-icon>
+                <mat-icon *ngIf="!group.expanded">expand_more</mat-icon>
+                <strong>{{groupByColumns[group.level-1]}} = {{group[groupByColumns[group.level-1]]}} ({{group.totalCounts}})</strong>
+ 
+              </mat-cell>
+
+            </ng-container>
+          
+
+            <mat-row *matRowDef="let row; columns: ['groupHeader']; when: isGroup" (click)="groupHeaderClick(row)"> </mat-row>
+          
+            
+          </mat-table>
+
+         <p>Total quantity {{totalquant}}</p>
+         <p>Total price {{totalPrice}}</p>
+          <mat-paginator [pageSizeOptions]="[ 10, 25, 100]"></mat-paginator>
+        -->
+
+
+
+  <!----   
+        <table mat-table [dataSource]="dataSource" *ngIf="rowSpans" matSort matSortActive="serial_no" matSortDirection="desc" class="mat-elevation-z8"  >
+        
+
+            
+
+         
+          <ng-container matColumnDef="serial_no">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Serial number </th>
+            <td mat-cell *matCellDef="let element"> {{element.serial_no}} </td>
+            <td mat-footer-cell *matFooterCellDef > Total  </td>
+
+          </ng-container>
+        
+          <ng-container matColumnDef="purchase_id">
+            <th mat-header-cell *matHeaderCellDef> Purchase_id </th>
+            <td mat-cell *matCellDef="let element;let i = index">
+             {{element.purchase_id}} </td>
+            <td mat-footer-cell *matFooterCellDef>  </td>
+
+          </ng-container>
+        
+          <ng-container matColumnDef="product_name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Product Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.product_name}} </td>
+            <td mat-footer-cell *matFooterCellDef>  </td>
+
+          </ng-container>
+        
+          <ng-container matColumnDef="quantity">
+            <th mat-header-cell *matHeaderCellDef> Quantity </th>
+            <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
+            <td mat-footer-cell *matFooterCellDef> {{totalquant}} </td>
+
+
+          </ng-container>
+        
+          <ng-container matColumnDef="buyingprice">
+            <th mat-header-cell *matHeaderCellDef> Buyingprice </th>
+            <td mat-cell *matCellDef="let element"> {{element.buyingprice}} </td>
+            <td mat-footer-cell *matFooterCellDef>{{(totalPrice)}}₹  </td>
+
+          </ng-container>
+
+
+          <ng-container matColumnDef="vendor_name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Vendor Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.vendor_name}} </td>
+            <td mat-footer-cell *matFooterCellDef>  </td>
+
+          </ng-container>
+
+          <ng-container matColumnDef="date">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
+            <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+            <td mat-footer-cell *matFooterCellDef>  </td>
+
+          </ng-container>
+
+          
+
+         
+        
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          <tr mat-footer-row *matFooterRowDef="displayedColumns; sticky: true"></tr>
+
+
+        </table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+      -->
+
+  <!----
+<mat-accordion *ngFor = "let prod of final_array | groupBy: 'purchase_id' | pairs | purchaseFilter :searchVendorCtrl  ; let i = index">
+        <mat-expansion-panel   >
+    
+        </mat-expansion-panel>
+        <mat-expansion-panel (opened)="panelOpenState = true"
+                             (closed)="panelOpenState = false">
+          <mat-expansion-panel-header >
+            <mat-panel-title >
+                
+                {{prod[0]}}
+
+            </mat-panel-title>
+            <mat-panel-description  >
+                Open me
+            </mat-panel-description>
+          </mat-expansion-panel-header >
+
+          <div class="row">
+                <div class="col-2"><b>Serial number</b></div>
+                <div class="col-2"> <b>Product name</b> </div>
+                <div class="col-2"> <b>Quantity</b> </div>
+                <div class="col-2"> <b>Vendor name</b> </div>
+                <div class="col-2"> <b>Date</b> </div>
+
+
+
+            </div>
+<mat-divider></mat-divider>
+          <div class="row"  *ngFor = "let val of prod[1]" > 
+                    
+                <div class="col-2" >{{val.serial_no}}</div>
+                <div class="col-2">{{val.product_name}}</div>
+                <div class="col-2">{{val.quantity}}</div>
+                <div class="col-2">{{val.vendor_name}}</div>
+                <div class="col-2">{{val.date}}</div>
+
+                <button class="btn btn-secondary" (click) = "update(val,val.serial_no)" >Edit</button>
+   
+                     
+            </div>         
+          
+        </mat-expansion-panel>
+      </mat-accordion>
+    -->
+</body>
+
+</html>

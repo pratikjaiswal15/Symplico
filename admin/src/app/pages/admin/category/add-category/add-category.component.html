@@ -1,0 +1,61 @@
+<html lang = "en">
+
+<body>    
+    <h2>Add category</h2>
+    <br>
+    <h5>select main category</h5>
+    <div class="container-fluid">
+        <form [formGroup]="addCform">
+        
+    <!----    
+        <div class="form-group">
+          
+         <select class="browser-default custom-select" formControlName = "selected"  >
+            <option value="" disabled >Select main category</option>
+            <option value= "{{cat.main_id}}"  *ngFor="let cat of categories_list" [ngValue]="selected" > {{cat.name}} </option>
+         </select>     
+        </div>  
+        
+    -->
+
+    <mat-form-field class = "select">
+            <mat-select placeholder="Choose main-category" formControlName = "selected" name="main-category" >
+                    <mat-select-filter [displayMember]="'name'" [array]="categories_list" (filteredReturn)="filteredList1 =$event"></mat-select-filter>
+
+                    <mat-option *ngFor="let prod of filteredList1 " [value]="prod.main_id">
+                {{prod.name}}
+              </mat-option>
+            </mat-select>
+    </mat-form-field>
+
+        <mat-divider></mat-divider>
+
+        
+
+        <div class="form-group">
+    
+            <label>Name of category</label>
+            <input [class.is-invalid] = "name.invalid && name.touched" formControlName="name" type="text" class="form-control" placeholder="Enter name of category">
+
+            <div *ngIf= "name.invalid && name.touched">
+                    <small *ngIf = "name.errors?.required"  class="text-danger"> name is required</small>
+                    <small *ngIf = "name.errors?.minlength" class="text-danger"> name must be at least 3 characters </small>
+
+            </div>     
+
+        </div>
+
+        <div class="form-group">
+            <label>Description:</label>
+            <textarea class="form-control" rows="5"  input type = "textarea"  formControlName="description" placeholder="Enter description"></textarea>
+        </div>
+
+                    
+  <button [disabled]="!addCform.valid || clicked" type="submit" class="btn btn-primary" (click) = "add()  ; clicked = true">add</button>
+
+</form>
+{{addCform.value | json}}
+</div>
+  
+</body>
+</html>

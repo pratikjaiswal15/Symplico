@@ -1,0 +1,40 @@
+<html lang = "en">
+   <body>
+
+        <br>
+        <button type="button" class="btn btn-primary btn-lg btn-block" routerLink = "/add-product" routerDirection = "forward" >Add product</button>  
+        <br>
+        <br>
+        <input class="form-control" type="text" [(ngModel)] = "searchTerm" placeholder="Search product" aria-label="Search">
+
+
+<br>
+        <h3> All products in the database </h3>
+     
+        <br>
+
+        <div class="row">
+            <div class="col-2">Product_id</div>
+            <div class="col-2">Name</div>
+            <div class="col-2">Description</div>
+            <div class="col-2">Price</div>
+
+          </div>  
+
+        <div class="container" *ngFor = "let prod of product_list | filter : searchTerm ">
+
+                
+                <br>
+                <div class="row">
+                         <div class="col-2">{{prod.product_id}}</div>
+                         <div class="col-2">{{prod.name}}</div>
+                         <div class="col-2">{{prod.description}}</div>
+                         <div class="col-2">{{prod.productPrices.fair_price + prod.productPrices.fluctuated_price - prod.productPrices.discount}}</div>
+
+                         
+                            <button class="btn btn-primary" (click) = "patch_price(prod.product_id,prod.productPrices.fair_price, prod.productPrices.fluctuated_price, prod.productPrices.discount )" > Change price</button>
+                            <button class="btn btn-primary" (click) = "view(prod)" > view</button>
+                            <button class="btn btn-primary" (click) = "update(prod, prod.product_id)" >Edit</button>
+                      <!----      <button class="btn btn-primary" (click) = "delete(prod.product_id)" routerLink = "/all-products"> delete</button>-->
+                </div>
+          </div>

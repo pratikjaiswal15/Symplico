@@ -1,0 +1,89 @@
+{
+  "name": "farmtofork",
+  "version": "1.0.0",
+  "description": "Admin",
+  "keywords": [
+    "loopback-application",
+    "loopback"
+  ],
+  "main": "index.js",
+  "engines": {
+    "node": ">=8.9"
+  },
+  "scripts": {
+    "build": "lb-tsc",
+    "build:watch": "lb-tsc --watch",
+    "clean": "lb-clean dist *.tsbuildinfo",
+    "lint": "npm run prettier:check && npm run eslint",
+    "lint:fix": "npm run eslint:fix && npm run prettier:fix",
+    "prettier:cli": "lb-prettier \"**/*.ts\" \"**/*.js\"",
+    "prettier:check": "npm run prettier:cli -- -l",
+    "prettier:fix": "npm run prettier:cli -- --write",
+    "eslint": "lb-eslint --report-unused-disable-directives .",
+    "eslint:fix": "npm run eslint -- --fix",
+    "pretest": "npm run clean && npm run build",
+    "test": "lb-mocha --allow-console-logs \"dist/__tests__\"",
+    "posttest": "npm run lint",
+    "test:dev": "lb-mocha --allow-console-logs dist/__tests__/**/*.js && npm run posttest",
+    "docker:build": "docker build -t farmtofork .",
+    "docker:run": "docker run -p 3000:3000 -d farmtofork",
+    "migrate": "node ./dist/migrate",
+    "prestart": "npm run build",
+    "start": "node -r source-map-support/register .",
+    "prepublishOnly": "npm run test"
+  },
+  "repository": {
+    "type": "git"
+  },
+  "author": "",
+  "license": "",
+  "files": [
+    "README.md",
+    "index.js",
+    "index.d.ts",
+    "dist",
+    "src",
+    "!*/__tests__"
+  ],
+  "dependencies": {
+    "@loopback/authentication": "^7.0.4",
+    "@loopback/authentication-jwt": "^0.7.4",
+    "@loopback/authorization": "^0.7.4",
+    "@loopback/boot": "^3.1.1",
+    "@loopback/cli": "^2.17.1",
+    "@loopback/context": "^3.13.1",
+    "@loopback/core": "^2.13.0",
+    "@loopback/openapi-v3": "^5.1.1",
+    "@loopback/repository": "^3.2.1",
+    "@loopback/rest": "^9.1.0",
+    "@loopback/rest-explorer": "^3.0.4",
+    "@loopback/service-proxy": "^3.0.4",
+    "axios": "^0.19.2",
+    "crypto-js": "^4.0.0",
+    "dot-prop": "^5.2.0",
+    "firebase-admin": "^9.2.0",
+    "hyperid": "^2.0.5",
+    "isemail": "^3.2.0",
+    "loopback-connector-mysql": "^5.4.2",
+    "multer": "^1.4.2",
+    "razorpay": "^2.0.6"
+  },
+  "devDependencies": {
+    "@loopback/build": "^6.2.7",
+    "@loopback/eslint-config": "^10.0.3",
+    "@loopback/testlab": "^3.2.9",
+    "@types/crypto-js": "^3.1.47",
+    "@types/method-override": "0.0.31",
+    "@types/morgan": "^1.9.1",
+    "@types/multer": "^1.4.3",
+    "@types/node": "^10.17.45",
+    "@typescript-eslint/eslint-plugin": "^4.8.1",
+    "@typescript-eslint/parser": "^4.8.1",
+    "eslint": "^7.13.0",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-plugin-eslint-plugin": "^2.3.0",
+    "eslint-plugin-mocha": "^8.0.0",
+    "source-map-support": "^0.5.19",
+    "typescript": "~4.0.5"
+  }
+}

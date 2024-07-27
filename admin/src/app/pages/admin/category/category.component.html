@@ -1,0 +1,29 @@
+<html lang = "en">
+   <head>
+      
+   </head>
+<body>
+
+    <div class="container-fluid">
+            <button type="button" class="btn btn-primary btn-lg btn-block" routerLink = "/add-category" routerDirection = "forward" >Add category</button>  
+<br>
+<input class="form-control" type="text" [(ngModel)] = "searchTerm" placeholder="Search product" aria-label="Search">
+<br>
+
+        <h2>All categories in the database</h2>
+        <div>
+                <div class="container" *ngFor = "let cat of categories_list | filter : searchTerm " >
+                        <div class="row">
+                                 <div class="col-3">{{cat.name}}</div>
+                                 <div class="col-3">{{cat.description}}</div>
+                                 <div class="col-3">{{cat.date}}</div>
+                                    <button class="btn btn-primary" (click) = "view(cat)" > view</button>
+                                    <button class="btn btn-primary" (click) = "update(cat, cat.category_id)" >Edit</button>
+                              <!----      <button class="btn btn-primary" (click) = "delete(cat.category_id)" routerLink = "/all-sub-categories"> delete</button> -->
+                        </div>
+                  </div>
+            
+        </div>
+    </div>
+       
+</body>

@@ -1,0 +1,41 @@
+
+<html lang = "en">
+
+
+<body>
+
+
+    <h3>Stock of all products</h3>
+
+    <br>
+    <input class="form-control" type="text" [(ngModel)] = "searchTerm" placeholder="Search product" aria-label="Search">
+    <br>
+
+
+
+<table class="table">
+        <thead>
+          <tr>
+            <th scope="col">product name</th>
+            <th scope="col">Total quantity</th>
+            <th scope="col">Remaining quantity</th>
+          </tr>
+        </thead>
+
+        <tbody >                       
+
+                    <tr *ngFor="let stock of stock_list | filter : searchTerm " >
+                       
+                      <td>{{stock.product.name}}</td>
+                      <td >{{stock.totalQuantity}}</td>
+                      <td >{{stock.RemainingQuantity}}</td>
+
+                    </tr>
+
+              </tbody>
+    </table>
+  
+  
+
+    </body>
+    </html>

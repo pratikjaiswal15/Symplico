@@ -1,0 +1,108 @@
+<html lang = "en">
+
+<body>
+
+    <h2>Add Product</h2>
+    <br>
+    <div class="container-fluid">
+        <form [formGroup]="addProductForm">
+            <div class="form-group">
+
+
+                <div class="form-group">
+
+                        <label>Name of product</label>
+                        <input [class.is-invalid] = "name.invalid && name.touched" formControlName="name" type="text" class="form-control" placeholder="Enter name of product">
+            
+                        <div *ngIf= "name.invalid && name.touched">
+                                <small *ngIf = "name.errors?.required"  class="text-danger"> name is required</small>
+                                <small *ngIf = "name.errors?.minlength" class="text-danger"> name must be at least 3 characters </small>
+            
+                        </div>     
+            
+                    </div>
+
+                    <label>Select Category</label>
+                <mat-form-field class = "select">
+                        <mat-select placeholder="Choose Category" formControlName = "selected" name="Sub-category" >
+                                <mat-select-filter [displayMember]="'name'" [array]="product_list" (filteredReturn)="filteredList1 =$event"></mat-select-filter>
+
+                                <mat-option *ngFor="let prod of filteredList1 " [value]="prod.category_id">
+                            {{prod.name}}
+                          </mat-option>
+                        </mat-select>
+                </mat-form-field>
+          
+                <mat-divider></mat-divider>
+              </div>
+
+              
+            <div class="form-group">
+                <label>Description:</label>
+                <textarea class="form-control" rows="5"  input type = "textarea"  formControlName="description" placeholder="Enter description"></textarea>
+            </div>
+
+            <div class="form-group">
+    
+              <label>GST on product</label>
+              <input [class.is-invalid] = "gst.invalid && gst.touched" formControlName="gst" type="number" class="form-control" placeholder="Enter gst on product">
+  
+              <div *ngIf= "gst.invalid && gst.touched">
+                      <small *ngIf = "gst.errors?.required"  class="text-danger"> gst is required</small>
+  
+              </div>     
+        
+                </div>
+                <mat-divider></mat-divider>
+                <Label>Select measure unit of product</Label>
+                <mat-form-field class="select">
+                  <mat-label>Unit</mat-label>
+                  <mat-select placeholder="Choose Unit" formControlName = "unit" name="Unit" >
+                    <mat-select-filter [displayMember]="'name'" [array]="unit_list" (filteredReturn)="filteredUnit =$event"></mat-select-filter>
+
+                    
+                    <mat-option *ngFor="let prod of filteredUnit " [value]="prod.name">
+                      {{prod.name}}
+                    </mat-option>
+
+                    </mat-select>
+                  
+                </mat-form-field>
+
+                <h5> Select image</h5>
+
+                <div class="form-group">
+                  <label for="file">File</label>
+                  <input 
+                      formControlName="file"
+                      id="file" 
+                      type="file" 
+                      class="form-control"
+                      (change)="onFileChange($event)">
+                  <div *ngIf="file.touched && file.invalid" class="alert alert-danger">
+                      <div *ngIf="file.errors.required">Image is required.</div>
+                  </div>
+              </div>
+              
+              <img [src]="imageSrc" *ngIf="imageSrc" style="height: 300px; width:500px">
+
+              <div class="form-group">
+    
+                <label>Enter MRP of product</label>
+                <input [class.is-invalid] = "mrp.invalid && mrp.touched" formControlName="mrp" type="number" class="form-control" placeholder="Enter MRP">
+    
+                <div *ngIf= "mrp.invalid && mrp.touched">
+                        <small *ngIf = "mrp.errors?.required"  class="text-danger"> mrp is required</small>
+    
+                </div>     
+          
+                  </div>
+                
+            <button [disabled]="!addProductForm.valid || clicked || v_check"  type="submit" class="btn btn-primary" (click) = "add() ; clicked = true">add</button>
+        </form>   
+     {{addProductForm.value | json}} 
+
+    </div>
+
+</body>
+</html>

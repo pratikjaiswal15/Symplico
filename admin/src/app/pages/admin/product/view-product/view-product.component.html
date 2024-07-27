@@ -1,0 +1,53 @@
+<html lang = "en">
+
+<body>
+
+        <div class="container-fluid">
+                <h2>Detais of product {{data.name}}</h2>
+                <div class="form-group">
+                    <label >Name:</label>
+                    <input type="text"  [readonly]="!editable" class="form-control" id="name" value="{{data.name}}">
+                </div>
+
+                <div class="form-group">
+                  <label >Photo:</label>
+                  <img [src]= "data.image_url" height="200" width="200">
+                </div>
+
+                <div class="form-group">
+                        <label>Description:</label>
+                        <textarea class="form-control" rows="5"  input type = "textarea" [readonly]="!editable" >{{data.description}}</textarea>
+                 </div>
+
+                 <div class="form-group">
+                        <label >Date created on:</label>
+                        <input type="text" [readonly]="!editable" class="form-control" id="date" value="{{data.date}}">
+                  </div>
+
+                  <div class="form-group">
+                    <label >Gst on product:</label>
+                    <input type="text" [readonly]="!editable" class="form-control" id="gst" value="{{data.gst}}">
+                  </div>
+
+                  <div class="form-group">
+                    <label >Measure Unit of product:</label>
+                    <input type="text" [readonly]="!editable" class="form-control" id="unit" value="{{data.unit}}">
+                  </div>
+
+
+                  <div class="form-group">
+                    <label >Product price:</label>
+                    <input type="number" [readonly]="!editable" class="form-control" id="unit" value="{{data.productPrices.fair_price + data.productPrices.fluctuated_price - data.productPrices.discount}}">
+                  </div>
+
+
+      <button type="button" class="btn btn-primary" routerLink = "/all-products" routerDirection= "backword">  Back</button>
+         
+
+
+
+        </div>
+
+ 
+    </body>
+    </html>
