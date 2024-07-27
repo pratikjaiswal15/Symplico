@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>order-success</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <br>
+  <div class="ion-text-center">
+    <ion-label>Order placed successfully</ion-label>
+  </div>
+
+  <ion-item class="ion-text-center">
+   <ion-label>Total amount of {{index}} items is {{rupees}} {{total}} </ion-label>
+  </ion-item>
+
+  <br>
+  <ion-label>Expected delivery by tomorrow before 10 A.M. on following address</ion-label>
+
+  <ion-item>
+    <ion-label class="ion-text-wrap">{{delivery_address}} - {{pincode}}</ion-label>
+  </ion-item>
+
+  <br>
+  <br>
+    <ion-text>In case of any help. Cotact us on following numbers</ion-text>
+
+    <br>
+    <br>
+    <ion-text> Pratik jaiswal - 9552869559/8668223663</ion-text>
+
+    <ion-button routerLink="/tabs/tab1" routerDirection="backword">Continue shopping</ion-button>
+
+   
+</ion-content>

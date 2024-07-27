@@ -1,0 +1,87 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+
+  <div [hidden]="display_phone || display_otp">
+  <ion-button color="success" expand = "block" (click)="login()">  Login With Google
+    <ion-icon slot="start" name="logo-google"></ion-icon> 
+   </ion-button>
+  </div>
+
+   <div [hidden]="disply_mail || display_otp">
+
+    <ion-label > Enter your mobile number </ion-label>
+  
+    <ion-item>
+     +91 | &nbsp;   <ion-input type="tel" [formControl] = "mobile_no" ></ion-input>
+  
+    </ion-item>
+    <ion-button id="send" [disabled] = "mobile_no.invalid" (click)="send( mobile_no.value)">Continue</ion-button>
+  </div>    
+
+
+  <div [hidden]="disply_mail || display_phone">
+
+    <ion-row >
+      <ion-col>
+        <ion-label class="ion-text-wrap">Enter the otp sent to  </ion-label>
+        <ion-label color="primary" (click) ="enter_mobile()"> +91 {{mobile_no.value}}</ion-label>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="OTP-border" >
+      <ion-col>
+        <div>
+          <ion-input #otp1 required="true" type="tel"  maxlength="1" [(ngModel)] ="otpArray.first" class="otpinput" (keyup)="otpController($event,otp2,'',1)" >
+          </ion-input>
+        </div>
+      </ion-col>
+      <ion-col>
+        <div>
+          <ion-input #otp2 required="true" type="tel"  maxlength="1" [(ngModel)] ="otpArray.second" class="otpinput" (keyup)="otpController($event,otp3,otp1,2)">
+          </ion-input>
+        </div>
+      </ion-col>
+      <ion-col>
+        <div>
+          <ion-input #otp3 required="true" type="tel"  maxlength="1" [(ngModel)] ="otpArray.third" class="otpinput" (keyup)="otpController($event,otp4,otp2, 3)">
+          </ion-input>
+        </div>
+      </ion-col>
+      <ion-col>
+        <div>
+          <ion-input #otp4 required="true" type="tel"  maxlength="1" [(ngModel)] ="otpArray.fourth" class="otpinput" (keyup)="otpController($event,otp5,otp3, 4)">
+          </ion-input>
+        </div>
+      </ion-col>
+      <ion-col>
+        <div>
+          <ion-input #otp5 required="true" type="tel"  maxlength="1" [(ngModel)] ="otpArray.fifth" class="otpinput" (keyup)="otpController($event,otp6,otp4, 5)">
+          </ion-input> 
+        </div>
+      </ion-col>
+      <ion-col>
+        <div>
+          <ion-input #otp6 required="true" type="tel"  maxlength="1" [(ngModel)] ="otpArray.sixth" class="otpinput" (keyup)="otpController($event,'',otp5, 6)">
+          </ion-input>
+        </div>
+      </ion-col>
+    </ion-row>
+    
+
+    <ion-button [disabled]= "!otpArray.first || !otpArray.second || !otpArray.third || !otpArray.fourth || !otpArray.fifth || !otpArray.sixth"
+     (click) ="verify(otpArray)">Submit</ion-button>
+
+     <br>
+     <ion-button (click)="send(mobile_no.value)">Resend OTP</ion-button>
+
+     
+  </div>
+    
+
+</ion-content>

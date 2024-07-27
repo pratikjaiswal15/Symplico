@@ -1,0 +1,32 @@
+
+.otpinput {
+  letter-spacing: 30px;
+  -webkit-padding-end: 0;
+  --padding-end: 0;
+  font-size: 30px;
+  border: none;
+  background: white;
+}
+
+.OTP-border {
+  ion-col {
+    div {
+      border-bottom: 1px solid;
+    }
+  }
+}
+
+.small {
+  font-size: 13px;
+  a {
+    text-decoration: unset !important;
+  }
+}
+
+.error {
+  color: red;
+  text-align: center;
+  display: block;
+  font-weight: bold;
+}
+

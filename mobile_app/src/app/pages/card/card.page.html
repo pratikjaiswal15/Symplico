@@ -1,0 +1,94 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Add new card</ion-title>
+    <ion-buttons slot ="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons> 
+    
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <form [formGroup] = "card">
+
+  <ion-item>
+    <ion-label position="floating">Name on card</ion-label>
+    <ion-input type ="text" formControlName = "name"></ion-input>
+  </ion-item>
+
+  <div style="color:red; padding-top: 0.2rem" *ngIf= "name.invalid && name.touched">
+    <small *ngIf = "name.errors?.required"  class="text-danger"> Please enter name</small>
+    <small *ngIf = "name.errors?.minlength" class="text-danger"> Enter valid name </small>
+    <small *ngIf = "name.errors?.pattern" class="text-danger"> Enter valid name </small>
+
+ </div>
+
+  <br>
+  <ion-item>
+    <ion-label position="floating">Card number</ion-label>
+    <ion-input  type ="text" formControlName = "cardnumber" (ionChange) ="cc_format($event.target.value)"  ></ion-input>
+  </ion-item>
+  
+  <div style="color:red; padding-top: 0.2rem" *ngIf= "cardnumber.invalid && cardnumber.touched">
+    <small *ngIf = "cardnumber.errors?.required"  class="text-danger"> Please enter your card number</small>
+    <small *ngIf = "cardnumber.errors?.minlength " class="text-danger"> Card number not valid </small>
+    <small *ngIf = "cardnumber.errors?.maxlength" class="text-danger"> Card number not valid </small>
+    <small *ngIf = "cardnumber.errors?.pattern" class="text-danger"> Card number not valid </small>
+
+ </div>
+  <br>
+
+  <ion-row>
+    <ion-col size="4">
+      <ion-item>
+        <ion-label position="floating">Month</ion-label>
+        <ion-select formControlName="month"  interface="popover" placeholder= "MM"> 
+          <ion-select-option *ngFor="let mn of month2">{{mn.code }}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+    </ion-col>
+
+    <ion-col size="4">
+
+      <ion-item>
+        <ion-label position="floating">Year</ion-label>
+        <ion-select formControlName = "year" interface="popover" placeholder= "YY">
+          <ion-select-option *ngFor="let yr of year2">{{yr}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+    
+      </ion-col>
+
+      <ion-col size='4'>
+      <ion-item>
+        <ion-label position="floating">CVV</ion-label>
+        <ion-input formControlName = "cvv" type="password"></ion-input>
+      </ion-item>
+
+      <div style="color:red; padding-top: 0.2rem" *ngIf= "cvv.invalid && cvv.touched">
+        <small *ngIf = "cvv.errors?.required "  class="text-danger"> Please enter CVV</small>
+        <small *ngIf = "cvv.errors?.minlength && cvv.errors?.maxlength && cvv.errors?.pattern" class="text-danger"> CVV not valid </small>
+        <small *ngIf = "cvv.errors?.maxlength" class="text-danger"> CVV not valid </small>
+        <small *ngIf = "cvv.errors?.pattern" class="text-danger"> CVV not valid </small>
+      
+     </div>
+
+    </ion-col>
+    </ion-row>  
+  
+    <br>
+    <ion-button type="submit" [disabled]="!card.valid" expand="full" (click)= "submit(card.value)">Submit</ion-button>
+
+    </form>
+
+
+
+<!----
+    <input #cardNumber [(ngModel)]="cardnum" [textMask]="mask" type="text" pattern="[0-9]{4}\s[0-9]{4}\s[0-9]{4}\s[0-9]{4}" maxlength="90" (keyup)="updateCard()">
+<i class="card ccs ccs-{{type?.card?.type}}"></i>
+{{cardnumber|json}}
+{{type|json}}
+-->
+</ion-content>

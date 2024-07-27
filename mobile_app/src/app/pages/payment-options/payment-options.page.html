@@ -1,0 +1,82 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Pay</ion-title>
+
+    <ion-buttons slot ="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons> 
+    
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-list *ngIf="all_options">
+    <ion-list-header>
+      Online Payments.
+    </ion-list-header>
+
+    <ion-item (click)="card()">
+      <ion-label>Debit, credit & ATM cards</ion-label>
+      <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+    </ion-item>
+
+    <ion-item (click)="netbanking()">
+      <ion-label>Netbanking</ion-label>
+      <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+    </ion-item>
+
+    <ion-item (click)="upi()">
+      <ion-label>UPI payments Apps</ion-label>
+      <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+    </ion-item>
+
+    <ion-item (click)="cash()">
+      <ion-label>cash</ion-label>
+      <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+    </ion-item>
+
+
+  </ion-list>
+
+  <div *ngIf="display_captcha">
+
+    <ion-spinner *ngIf="spinner" name="crescent"></ion-spinner>
+    <br>
+    <br>
+    <re-captcha (resolved)="captchaResolved($event)" siteKey="6LdXNt8UAAAAAMFIpXckW2UzhrOYbn42GVht4KMy"></re-captcha>
+    <br>
+    <ion-button [disabled]="!captchaPassed" ion-button (click)="sendForm()">Submit</ion-button>
+
+  </div>
+
+
+ <div *ngIf="show_success">
+
+  <br>
+  <div class="ion-text-center">
+    <ion-label>Order placed successfully</ion-label>
+  </div>
+
+  <ion-item class="ion-text-center">
+    <ion-label>Total amount of {{index}} items is {{rupees}} {{total}} </ion-label>
+   </ion-item>
+ 
+   <br>
+   <ion-label>Expected delivery by tomorrow before 10 A.M. on following address</ion-label>
+ 
+   <ion-item>
+     <ion-label class="ion-text-wrap">{{concat}} - {{pincode}}</ion-label>
+   </ion-item>
+ 
+   <br>
+   <br>
+     <ion-text>In case of any help. Cotact us on following numbers</ion-text>
+ 
+     <br>
+     <br>
+     <ion-text> Pratik jaiswal - 9552869559/8668223663</ion-text>
+ 
+<ion-button routerLink="/tabs/tab1" routerDirection="backword">Continue shopping</ion-button>
+ </div>
+</ion-content>

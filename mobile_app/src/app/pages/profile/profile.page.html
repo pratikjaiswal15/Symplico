@@ -1,0 +1,110 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>My Account</ion-title>
+
+
+    <ion-buttons slot ="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+         
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="padding">      
+    
+<ion-list-header>
+  <ion-label>Personal Information</ion-label>
+</ion-list-header>
+
+<ion-row>
+<ion-item lines="none">
+  <ion-col size="3">
+    <ion-avatar>
+      <ion-img  [src]="image_url"></ion-img>
+    </ion-avatar>
+  </ion-col>
+
+</ion-item>
+  
+  <ion-col>
+    <ion-row>
+      <ion-label>{{name}}</ion-label>
+    </ion-row>
+
+
+    <ion-row>
+      <ion-label>{{mobile_number}}</ion-label>
+    </ion-row>
+
+    <ion-row>
+      <ion-label>{{email}}</ion-label>
+      <br>
+    </ion-row>
+  </ion-col>
+
+</ion-row>
+
+
+
+<ion-list-header>
+  <ion-label>Business Information</ion-label>  
+</ion-list-header>
+
+<form [formGroup] = "BusinesForm">
+
+
+  <ion-item>
+    <ion-label position="stacked" >Name of business</ion-label>
+    <ion-input #business [readonly]="!isReadOnly" formControlName = "Business_name" type = "text" value="Business_name.value"></ion-input>
+    <ion-icon name="pencil-outline" slot="end" (click)="edit(business)" ></ion-icon>
+
+  </ion-item>
+
+
+  <div style="color:red; padding-top: 0.2rem" *ngIf= "Business_name.invalid && Business_name.touched">
+    <small *ngIf = "Business_name.errors?.required"  class="text-danger"> Enter name of your business</small>
+    <small *ngIf = "Business_name.errors?.minlength" class="text-danger"> name must be at least 3 characters </small>
+    <small *ngIf = "Business_name.errors?.pattern" class="text-danger"> Enter valid name </small>
+ </div>
+
+  <div>
+  <ion-item>
+    <ion-label position="stacked" >GST number</ion-label>
+    <ion-input [readonly]="!isReadOnly" formControlName = "GST_no" type = "text" value="GST_no.value"></ion-input>
+  </ion-item>
+
+
+  <div  style="color:red; padding-top: 0.2rem" *ngIf= "GST_no.invalid && GST_no.touched">
+    <small *ngIf = "GST_no.errors?.minlength" class="text-danger"> Hint: GST number is of 15 digits </small>
+    <small *ngIf = "GST_no.errors?.maxlength" class="text-danger"> Hint: GST number is of 15 digits </small>
+    <small *ngIf = "GST_no.errors?.pattern" class="text-danger"> Enter valid GST_no </small>
+
+ </div>
+</div>
+
+  <div *ngIf="FSAAI_license.value">
+  <ion-item >
+    <ion-label position="stacked" >FSSAI License</ion-label>
+    <ion-input [readonly]="!isReadOnly" formControlName = "FSAAI_license" type = "text" value="FSAAI_license.value"></ion-input>
+  </ion-item>
+
+
+  <div style="color:red; padding-top: 0.2rem" *ngIf= "FSAAI_license.invalid && FSAAI_license.touched">
+    <small *ngIf = "FSAAI_license.errors?.minlength" class="text-danger"> Hint: FSAAI license is of 14 digits </small>
+    <small *ngIf = "FSAAI_license.errors?.maxlength" class="text-danger"> Hint: FSAAI license is of 14 digits </small>
+    <small *ngIf = "FSAAI_license.errors?.pattern" class="text-danger"> Enter valid FSAAI license </small>
+
+ </div>
+
+ 
+
+</div>
+
+<br>
+<div *ngIf="isReadOnly" class="ion-text-center">
+  <ion-button [disabled]="BusinesForm.invalid" (click) ="submit(BusinesForm.value)" >Submit</ion-button>
+</div>
+ </form> 
+
+ <ion-button (click)="logout()">Logout</ion-button>
+</ion-content>

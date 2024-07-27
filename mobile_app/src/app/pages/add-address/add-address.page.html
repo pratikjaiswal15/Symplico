@@ -1,0 +1,131 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-title class="ion-text-center">Add new address</ion-title>
+        <ion-buttons slot ="start">
+            <ion-back-button></ion-back-button>
+          </ion-buttons> 
+      </ion-toolbar>
+</ion-header>
+
+<ion-content  >
+    <ion-button style="text-transform:none" expand="full" fill = "clear" (click)="checkGPSPermission()">
+        <ion-icon name="locate"></ion-icon>  Use my current location
+      </ion-button>
+
+      
+<form [formGroup]="addressForm">
+
+  <ion-item>
+    <ion-label position="floating" >Pin code</ion-label>
+    <ion-input formControlName="pincode" *ngIf ="pincode" value = "{{pincode.value}}" type="text"></ion-input>
+  </ion-item>
+
+  <div style="color:red; padding-top: 0.2rem" *ngIf= "pincode.invalid && pincode.touched">
+    <small *ngIf = "pincode.errors?.required"  class="text-danger"> Please enter pincode! </small>
+    <small *ngIf = "pincode.errors?.minlength" class="text-danger"> Pincode must be of 6 digits! </small>
+    <small *ngIf = "pincode.errors?.maxlength" class="text-danger"> Pincode must be of 6 digits! </small>
+    <small *ngIf = "pincode.errors?.pattern" class="text-danger"> Enter a valid pincode!  </small>
+
+ </div>
+
+ <br>
+
+
+  <ion-item>
+      <ion-label position="floating" > Address line 1</ion-label>
+      <ion-input formControlName="address_line1" type="text"></ion-input>
+    </ion-item>
+
+    <div style="color:red; padding-top: 0.2rem" *ngIf= "address_line1.invalid && address_line1.touched">
+      <small *ngIf = "address_line1.errors?.required"  class="text-danger"> Please enter address line 1! </small>
+      <small *ngIf = "address_line1.errors?.minlength" class="text-danger"> Address too small! </small>
+  
+   </div> 
+
+   <br>
+
+
+    <ion-item>
+        <ion-label position="floating"  >Road, Area ,Colony</ion-label>
+        <ion-input #road formControlName="address_line2" *ngIf ="address_line2" value = "{{address_line2.value}}" type="text"></ion-input>
+      </ion-item>
+
+      <div style="color:red; padding-top: 0.2rem" *ngIf= "address_line2.invalid && address_line2.touched">
+        <small *ngIf = "address_line2.errors?.required"  class="text-danger"> Please enter this field! </small>
+        <small *ngIf = "address_line2.errors?.minlength" class="text-danger"> Address too small! </small>
+    
+     </div> 
+     <br>
+
+
+  <ion-row>
+    <ion-col size="6">
+      <ion-item>
+        <ion-label position="floating" >City</ion-label>
+        <ion-input formControlName="city" *ngIf ="city" value = "{{city.value}}" type="text"></ion-input>
+      </ion-item>
+
+      <div style="color:red; padding-top: 0.2rem" *ngIf= "city.invalid && city.touched">
+        <small *ngIf = "city.errors?.required"  class="text-danger"> Please enter your city name! </small>
+        <small *ngIf = "city.errors?.minlength" class="text-danger"> City name too small! </small>
+    
+     </div> 
+
+</ion-col>
+ 
+<ion-col size="6">
+      <ion-item>
+        <ion-label  position="floating" >State</ion-label>
+        <ion-input formControlName="state" *ngIf ="state" value="{{state.value}}" type="text"></ion-input>
+      </ion-item>
+
+      <div style="color:red; padding-top: 0.2rem" *ngIf= "state.invalid && state.touched">
+        <small *ngIf = "state.errors?.required"  class="text-danger"> Please enter your state name! </small>
+        <small *ngIf = "state.errors?.minlength" class="text-danger"> Enter valid state name! </small>
+    
+     </div> 
+
+</ion-col>
+  
+
+</ion-row>
+
+<br>
+
+ 
+<ion-item>
+    <ion-label position="floating" >Landmark(optional)</ion-label>
+    <ion-input formControlName="Landmark" type="text"></ion-input>
+  </ion-item>
+
+  <div style="color:red; padding-top: 0.2rem" *ngIf= "Landmark.invalid && Landmark.touched">
+    <small *ngIf = "Landmark.errors?.minlength" class="text-danger"> Landrmark too small to identify! </small>
+
+ </div> 
+
+<br>
+
+  <ion-item>
+    <ion-label  position="floating" >Alternate mobile number (optional)</ion-label>
+    <ion-input formControlName="alternate" type="text"></ion-input>
+  </ion-item>
+
+  <div style="color:red; padding-top: 0.2rem" *ngIf= "alternate.invalid && alternate.touched">
+    <small *ngIf = "alternate.errors?.minlength" class="text-danger"> Enter valid mobile number! </small>
+    <small *ngIf = "alternate.errors?.maxlength" class="text-danger"> Enter valid mobile number! </small>
+
+ </div> 
+
+ <br>
+ <br>
+</form>
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-button  [disabled]="!addressForm.valid" color= "tertiary"  type = "submit" expand= "full" (click) ="submit(addressForm.value)"   >Submit</ion-button>
+
+  </ion-toolbar>
+
+</ion-footer>

@@ -1,0 +1,105 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>netbanking</ion-title>
+    <ion-buttons slot ="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons> 
+    
+  </ion-toolbar>
+</ion-header>
+
+<ion-content >
+
+  <ion-list>
+    <ion-list-header>
+      Popular banks
+    </ion-list-header>
+    <ion-item (click)="selected_bank('HDFC')">
+      <div>
+        <img src="assets/banklogo/hdfc.png" height="50" width="50">
+
+      </div>
+
+        &nbsp;
+        &nbsp;
+          <ion-label>
+            {{hdfc}}
+          </ion-label>
+          <ion-icon name="chevron-forward-outline" slot="end" ></ion-icon>
+    </ion-item>
+  
+
+    <ion-item (click)="selected_bank('ICIC')">
+      <div>
+        <img src="assets/banklogo/icici.jpg" height="40" width="50">
+
+      </div>
+        &nbsp;
+        &nbsp;
+          <ion-label>
+            {{icici}}
+          </ion-label>
+          <ion-icon name="chevron-forward-outline" slot="end" ></ion-icon>
+    </ion-item>    
+
+    <ion-item (click)="selected_bank('KKBK')">
+      <div>
+        <img src="assets/banklogo/kotak3.jpg" height="40" width="50">
+      </div>
+      &nbsp;
+      &nbsp;
+      <ion-label>
+         {{kotak}}         
+      </ion-label>
+      <ion-icon name="chevron-forward-outline" slot="end" ></ion-icon>
+
+    </ion-item>
+
+    <ion-item (click)="selected_bank('SBIN')">
+      <div>
+        <img src="assets/banklogo/sbi2.png" height="30" width="40">
+      </div>
+      &nbsp;
+      &nbsp;
+      &nbsp;
+      
+      <ion-label>
+          {{sbi}}
+      </ion-label>
+      <ion-icon name="chevron-forward-outline" slot="end" ></ion-icon>
+
+    </ion-item>
+
+
+    <ion-item  (click)="selected_bank('IBKL')">
+      <div>
+        <img src="assets/banklogo/idbi2.png" height="40" width="40">
+      </div>
+      &nbsp;
+      &nbsp;
+      &nbsp;
+      <ion-label>
+        {{idbi}}
+      </ion-label>
+      <ion-icon name="chevron-forward-outline" slot="end" ></ion-icon>
+
+    </ion-item>
+   
+  </ion-list>
+
+  
+ <ion-list *ngIf="display">
+  <ion-list-header>
+    All banks 
+  </ion-list-header>
+   <ion-item  *ngFor="let bank of banks | keyvalue " (click)="selected_bank(bank.key)">
+    <ion-label>
+      {{bank.value }}
+    </ion-label>
+    <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+
+   </ion-item>
+
+ </ion-list>
+
+</ion-content>

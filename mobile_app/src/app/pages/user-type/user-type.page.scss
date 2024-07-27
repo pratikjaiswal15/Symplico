@@ -1,0 +1,17 @@
+	
+
+ion-card{
+    display: flex;
+    flex-direction: column;
+    width: 100% !important;
+    margin: 0 !important;
+    background-color:white; 
+    box-shadow: none;
+  }
+
+    
+button.item:hover a{
+    background-color: slategray;
+    box-shadow: inset 0px 0px 0px 1px red;
+}    
+

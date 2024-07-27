@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar >
+    <ion-buttons slot="start">
+      <ion-button color="dark" (click)="close()">
+          <ion-icon name="close"></ion-icon>
+        </ion-button>
+  </ion-buttons>
+  
+        <ion-title> Select an Address</ion-title>
+  </ion-toolbar>
+  
+</ion-header>
+
+
+<ion-content>
+
+  <br>
+  
+  <ion-button  style="text-transform:none" color= "primary" fill ="clear"  (click) = "add_address()" >
+    <ion-icon name="add" ></ion-icon> Add new address
+</ion-button>
+
+  <ion-list>
+    <ion-list-header>
+      Saved addresses
+    </ion-list-header>
+
+        <ion-item *ngFor = "let address of all_address" > 
+          <div (click) = "selected_address(address)" >
+            {{address.address_line1}} , {{address.address_line1}} , {{address.landmark}} ,{{address.city}} ,{{address.state}} - 
+            {{address.pincode}}
+            
+          </div>
+          <ion-icon (click) = "button_clicked($event,address)" name="ellipsis-vertical" slot="end"></ion-icon>
+        </ion-item>
+            
+
+  </ion-list>
+  
+</ion-content>

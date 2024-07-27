@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">famrtofork</string>
+    <string name="title_activity_main">famrtofork</string>
+    <string name="package_name">com.farm.fork</string>
+    <string name="custom_url_scheme">com.farm.fork</string>
+</resources>

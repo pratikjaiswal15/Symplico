@@ -1,0 +1,60 @@
+/*ion-fab-button {
+    height: 60px;
+    width: 60px;
+  }
+   
+   
+  .cart-length {
+    color: var(--ion-color-primary);
+    position: absolute;
+    top: 18px;
+    left: 25px;
+    font-weight: 600;
+    font-size: 1em;
+    min-width: 25px;
+    z-index: 10;
+}
+
+.cart{
+    position: relative; 
+}
+*/
+
+.cart-icon {
+    font-size: 30px;
+  }
+
+
+.cart-badge{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}
+
+ion-badge {
+  color: #fff;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  border-radius: 100%;
+}
+
+ion-slides{
+ // margin-top: 30%;
+  background : #f4f5f8;
+  height: 350px; /* slider height you want */
+
+  
+  img{
+    padding-top: 20px;
+    padding-bottom: 20pxs;
+ //   width: 100;
+  }
+ 
+ion-slide{
+  display: flex;
+  flex-direction: row;
+}  
+
+
+}

@@ -1,0 +1,23 @@
+{
+  "appId": "com.farm.fork",
+  "appName": "famrtofork",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "www",
+  "cordova": {
+    "preferences": {
+      "ScrollEnabled": "false",
+      "android-minSdkVersion": "19",
+      "BackupWebStorage": "none",
+      "SplashMaintainAspectRatio": "true",
+      "FadeSplashScreenDuration": "300",
+      "SplashShowOnlyFirstTime": "false",
+      "SplashScreen": "screen",
+      "SplashScreenDelay": "3000"
+    }
+  },
+  "server": {
+    "url": "http://192.168.43.147:8100",
+    "cleartext": true
+  }
+}

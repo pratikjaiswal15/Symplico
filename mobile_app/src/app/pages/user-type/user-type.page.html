@@ -1,0 +1,84 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>user-type</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<!----
+<div [hidden] = hidden  >
+  <ion-list>
+      
+<ion-card> 
+
+     <button  inset = true *ngFor="let item of items"  (click)="open($event, item.name)" >
+        <ion-card>
+         <h2> <b>{{ item.name }} </b>  </h2>
+           
+          <p> Recommended for</p>
+          {{item.Description}}
+        </ion-card>
+      <br>
+      <br>
+    </button>
+  
+</ion-card>
+
+  
+</ion-list>
+</div>
+-->
+
+<div>
+
+  
+    <form [formGroup] = "Form">
+    <ion-item>
+        <ion-label position="floating">Business name</ion-label>
+        <ion-input formControlName = "Business_name" type = "text"></ion-input>
+    </ion-item>
+
+      <div style="color:red; padding-top: 0.2rem" *ngIf= "Business_name.invalid && Business_name.touched">
+          <small *ngIf = "Business_name.errors?.required"  class="text-danger"> Enter name of your business</small>
+          <small *ngIf = "Business_name.errors?.minlength" class="text-danger"> name must be at least 3 characters </small>
+          <small *ngIf = "Business_name.errors?.pattern" class="text-danger"> Enter valid name </small>
+
+       </div>
+
+      <ion-item>
+          <ion-label position="floating">GST number (optional)</ion-label>
+          <ion-input formControlName = "GST_no" type = "tel"></ion-input>
+      </ion-item>
+
+      <div style="color:red; padding-top: 0.2rem" *ngIf= "GST_no.invalid && GST_no.touched">
+          <small *ngIf = "GST_no.errors?.minlength" class="text-danger"> Hint: GST number is of 15 digits </small>
+          <small *ngIf = "GST_no.errors?.maxlength" class="text-danger"> Hint: GST number is of 15 digits </small>
+
+       </div>
+       <p style="font-size: 12px;">Hint: GST number is of 15 digits</p>
+
+
+       <ion-item>
+        <ion-label position="floating">FSAAI License number (optional)</ion-label>
+        <ion-input formControlName = "FSAAI_license" type = "tel"></ion-input>
+    </ion-item>
+
+
+    <div style="color:red; padding-top: 0.2rem" *ngIf= "FSAAI_license.invalid && FSAAI_license.touched">
+      <small *ngIf = "FSAAI_license.errors?.minlength" class="text-danger"> Hint: FSAAI license is of 14 digits </small>
+      <small *ngIf = "FSAAI_license.errors?.maxlength" class="text-danger"> Hint: FSAAI license is of 14 digits </small>
+
+   </div>
+   <p style="font-size: 12px;">Hint: FSAAI license is of 14 digits</p>
+      <br>
+
+      <ion-button  [disabled]="!Form.valid"  type ="submit"  (click) = "submit(Form.value)" > Submit</ion-button>  
+    </form>
+</div>
+
+
+
+</ion-content>

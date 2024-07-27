@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+  
+  <base-config cleartextTrafficPermitted="true">
+        <trust-anchors>
+            <certificates src="system" />
+        </trust-anchors>
+  </base-config>
+    
+
+    <domain-config cleartextTrafficPermitted="true">
+
+
+        <domain includeSubdomains="true">192.168.43.147:3000</domain> <!--Ip address-->
+        <domain includeSubdomains="true">192.168.43.147:3000/products</domain>
+        <domain includeSubdomains="true">10.0.2.2 </domain>
+
+    </domain-config>
+</network-security-config>
